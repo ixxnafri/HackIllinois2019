@@ -31,6 +31,8 @@ class ViewController3: UIViewController, StreamDelegate {
     //Data received
     var buffer = [UInt8](repeating: 0, count: 200)
     
+    var flag = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -75,8 +77,11 @@ class ViewController3: UIViewController, StreamDelegate {
         buffer = [UInt8](repeating: 0, count: 200)
         //stream(aStream: inStream!)
         
-        inStream?.read(&buffer, maxLength: buffer.count)
-        bufferStr = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
+        if (flag == 1){
+            inStream?.read(&buffer, maxLength: buffer.count)
+            bufferStr = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
+            flag = 0
+        }
         
         print(bufferStr!)
         var temp = bufferStr! as String
@@ -88,20 +93,7 @@ class ViewController3: UIViewController, StreamDelegate {
         label.text = "Devices: " + token[0]
         label2.text = "Air Quality: " + token[1]
     }
-    
-    func stream(aStream: InputStream) {
-        print("HasBytesAvailable")
-        inStream?.read(&buffer, maxLength: buffer.count)
-        bufferStr = NSString(bytes: &buffer, length: buffer.count, encoding: String.Encoding.utf8.rawValue)
-        
-        print(bufferStr!)
-        var temp = bufferStr! as String
-        temp.remove(at: temp.startIndex)
-        let delimiter = ","
-        var token = temp.components(separatedBy: delimiter)
-        label.text = "Devices: " + token[0]
-        label2.text = "Air Quality: " + token[1]
-    }
+
     
     func LabelSetup() {
         let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 300, height: 150))

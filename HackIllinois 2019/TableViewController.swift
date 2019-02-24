@@ -11,6 +11,13 @@ import UIKit
 class TableViewController: UITableViewController {
     
     var rooms = ["Room 1", "Room 2", "Room 3"]
+    
+    var yourVariable : UIViewController!
+    
+    var yourVariable2 : UIViewController!
+
+    var yourVariable3 : UIViewController!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,19 +75,28 @@ class TableViewController: UITableViewController {
         let currentItem = currentCell!.textLabel!.text
         
         if (currentItem == "Room 1"){
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let destination = storyboard.instantiateViewController(withIdentifier: "data") as! ViewController
-            navigationController?.pushViewController(destination, animated: true)
+//            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//            let destination = storyboard.instantiateViewController(withIdentifier: "data") as! ViewController
+//            navigationController?.pushViewController(destination, animated: true)
+            if yourVariable == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                yourVariable = storyboard.instantiateViewController(withIdentifier: "data")
+            }
+            navigationController?.pushViewController(yourVariable, animated: true)
         }
         else if (currentItem == "Room 2"){
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let destination = storyboard.instantiateViewController(withIdentifier: "data2") as! ViewController2
-            navigationController?.pushViewController(destination, animated: true)
+            if yourVariable2 == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                yourVariable2 = storyboard.instantiateViewController(withIdentifier: "data2")
+            }
+            navigationController?.pushViewController(yourVariable2, animated: true)
         }
         else{
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let destination = storyboard.instantiateViewController(withIdentifier: "data3") as! ViewController3
-            navigationController?.pushViewController(destination, animated: true)
+            if yourVariable3 == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                yourVariable3 = storyboard.instantiateViewController(withIdentifier: "data3")
+            }
+            navigationController?.pushViewController(yourVariable3, animated: true)
         }
     }
     
